@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 
 include 'aimee.instagram.class.php';
 
-$tags = ('englishbulldog', 'bulldog', 'igbulldogs_worldwide');
+$tags = array('englishbulldog', 'bulldog', 'igbulldogs_worldwide');
 
 $ig = new Instagram('access_token', true);
 
