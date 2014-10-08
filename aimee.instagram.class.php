@@ -12,7 +12,7 @@ class Instagram {
         );
     }
 
-    public function logData($log) {
+    public function log($log) {
         $file = "log.txt";
         $content = file_get_contents("log.txt");
         $content .= $log . "\n";
@@ -48,6 +48,7 @@ class Instagram {
         $data = $this->curl($url);
         $data = json_decode($data, true);
 
+/*
         if ($data['meta']['code'] == 200) {
             $media_ids = array();
             for ($i=0; $i < $num_results; $i++) {
@@ -57,6 +58,21 @@ class Instagram {
             shuffle($media_ids);
             // Return ONE media id.
             return $media_ids[0];
+*/
+        if ($data['meta']['code'] == 200) {
+
+            shuffle($data['data']);
+            return $data['data'][0]['id'];
+
+        } else {
+            $this->log("API Error: ".print_r($data,true));
+        }
+
+        // log data on error code
+        if ($data['meta']['code'] == 429) {
+            $this->log("API Error: ".print_r($data,true));
+        }
+
         } else {
             $log = print_r($data);
             $this->logData($log);
@@ -72,20 +88,20 @@ class Instagram {
         $data = $this->curl($url, $data_type='post', $post_params=$params);
         $data = json_decode($data, true);
         
-        $log = null;
-
         if ($data['meta']['code'] == 200) {
-            $log = "Success! Liked post ID " . $media_id . ". ";
-            $this->logData($log);
-        } else {
-            $log = print_r($data);
-            $this->logData($log);
-            exit;
+            $this->log("$this->access_token liked post $media_id");
+            #$log = "Success! Liked post ID " . $media_id . ". ";
+            #echo $log;
+        } 
+        if ($data['meta']['code'] == 429) {
+            $this->log("API Error: ".print_r($data,true));
+            #print_r($data);
+        #    $log = print_r($data);
+        #    $this->logData($lost);
+        #    exit;
+
         }
 
-        if ($this->testing) {
-            echo $log;
-        }
     }
 
 
@@ -96,18 +112,14 @@ class Instagram {
             'access_token' => $this->access_token, 
             'text'         => $comment_text
         );
+
         $data = $this->curl($url, $data_type='post', $post_params=$params);
-        $log = null;
 
         if ($data['meta']['code'] == 200) {
-                $log = "Success! You posted comment " .$comment_text." to object ID " . $media_id . ". ";
-                $this->logData($log);
+            $this->log("$this->access_token commented ".$comment_text." ID ".$media_id);
         }
-
         if ($data['meta']['code'] == 429) {
-            $log = print_r($data);
-            $this->logData($log);
-            exit;
+            $this->log("API Error: ".print_r($data,true));
         }
 
         if ($this->testing) {
