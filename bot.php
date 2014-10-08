@@ -9,7 +9,7 @@ include 'aimee.instagram.class.php';
 
 $tags = ('englishbulldog', 'bulldog', 'igbulldogs_worldwide');
 
-$ig = new Instagram('access_token', false);
+$ig = new Instagram('access_token', true);
 
 foreach ($tags as $tag) {
     $media_id = $ig->getIDByTag($tag);
