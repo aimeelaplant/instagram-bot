@@ -14,8 +14,9 @@ $ig = new Instagram('access_token', true);
 foreach ($tags as $tag) {
     $media_id = $ig->getIDByTag($tag);
     $ig->likeMedia($media_id);
+
+    unset($ig);
 }
 
-unset($ig);
 
 ?>
