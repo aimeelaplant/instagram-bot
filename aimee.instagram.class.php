@@ -83,7 +83,7 @@ class Instagram {
             exit;
         }
 
-        if ($this->testing == true) {
+        if ($this->testing) {
             echo $log;
         }
     }
@@ -110,7 +110,7 @@ class Instagram {
             exit;
         }
 
-        if ($this->testing == true) {
+        if ($this->testing) {
             echo $log;
         }
     }
