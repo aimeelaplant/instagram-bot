@@ -20,7 +20,6 @@ class Instagram {
     }
 
     public function curl($url, $data_type = null, $post_params = null) {
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -89,10 +88,12 @@ class Instagram {
             'text'         => $comment_text
         );
         $data = $this->curl($url, $data_type='post', $post_params=$params);
+
         if ($data['meta']['code'] == 200) {
             $log = "Success! You posted comment " .$comment_text." to object ID " . $media_id . ". ";
             $this->logData($log);
         }
+
         if ($data['meta']['code'] == 429) {
             $this->logData($data);
             exit;
