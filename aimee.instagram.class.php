@@ -12,14 +12,15 @@ class Instagram {
         );
     }
 
-    public function logData($data) {
+    public function logData($log) {
         $file = "log.txt";
-        $handle = fopen($file, 'w');
-        fwrite($handle, $data);
-        fclose($handle);
+        $content = file_get_contents("log.txt");
+        $content .= $log . "\n";
+        file_put_contents($file, $content);
     }
 
     public function curl($url, $data_type = null, $post_params = null) {
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -37,6 +38,7 @@ class Instagram {
         return $results;
     }
 
+
 //1 comment per run. 
     public function getIDByTag($tag) {
         // Returns ONE random ID
@@ -47,7 +49,6 @@ class Instagram {
         $data = json_decode($data, true);
 
         if ($data['meta']['code'] == 200) {
-            // Puts results into an array.
             $media_ids = array();
             for ($i=0; $i < $num_results; $i++) {
                 $media_ids[] = $data['data'][$i]['id'];
@@ -57,10 +58,11 @@ class Instagram {
             // Return ONE media id.
             return $media_ids[0];
         } else {
-            print_r($data);
-            $this->logData($data);
+            $log = print_r($data);
+            $this->logData($log);
             exit;
         }
+
     }
 
     public function likeMedia($media_id) {
@@ -69,13 +71,20 @@ class Instagram {
         $params = array('access_token' => $this->access_token);
         $data = $this->curl($url, $data_type='post', $post_params=$params);
         $data = json_decode($data, true);
+        
+        $log = null;
 
         if ($data['meta']['code'] == 200) {
             $log = "Success! Liked post ID " . $media_id . ". ";
             $this->logData($log);
         } else {
-            $this->logData($data);
+            $log = print_r($data);
+            $this->logData($log);
             exit;
+        }
+
+        if ($this->testing == true) {
+            echo $log;
         }
     }
 
@@ -88,15 +97,21 @@ class Instagram {
             'text'         => $comment_text
         );
         $data = $this->curl($url, $data_type='post', $post_params=$params);
+        $log = null;
 
         if ($data['meta']['code'] == 200) {
-            $log = "Success! You posted comment " .$comment_text." to object ID " . $media_id . ". ";
-            $this->logData($log);
+                $log = "Success! You posted comment " .$comment_text." to object ID " . $media_id . ". ";
+                $this->logData($log);
         }
 
         if ($data['meta']['code'] == 429) {
-            $this->logData($data);
+            $log = print_r($data);
+            $this->logData($log);
             exit;
+        }
+
+        if ($this->testing == true) {
+            echo $log;
         }
     }
 
