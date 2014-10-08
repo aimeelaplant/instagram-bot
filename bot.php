@@ -9,9 +9,9 @@ include 'aimee.instagram.class.php';
 
 $tags = array('englishbulldog', 'bulldog', 'igbulldogs_worldwide');
 
-$ig = new Instagram('access_token', true);
 
 foreach ($tags as $tag) {
+    $ig = new Instagram('access_token', true);
     $media_id = $ig->getIDByTag($tag);
     $ig->likeMedia($media_id);
 
