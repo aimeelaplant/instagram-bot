@@ -16,6 +16,7 @@ foreach ($tags as $tag) {
     $ig->likeMedia($media_id);
 
     unset($ig);
+    sleep(5);
 }
 
 
