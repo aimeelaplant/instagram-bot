@@ -71,7 +71,6 @@ class Instagram {
         // log data on error code
         if ($data['meta']['code'] == 429) {
             $this->log("API Error: ".print_r($data,true));
-        }
 
         } else {
             $log = print_r($data);
