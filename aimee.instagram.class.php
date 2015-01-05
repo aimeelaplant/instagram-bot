@@ -16,6 +16,7 @@ class Instagram {
         $this->client_id = $client_id;
         $this->client_secret = $client_secret;
         $this->redirect_uri = $redirect_uri;
+        $this->log = $log;
     }
 
     // login url for user to grant permission to client.
@@ -91,7 +92,7 @@ class Instagram {
         $results = $this->curl($url, $post_params=$params);
 
         // log response
-        if ($log) {
+        if ($this->log) {
             if ($results['meta']['code'] == 200)   {
                 $this->log($this->getAccessToken() . 'liked object ID' . $id);
             } else {
