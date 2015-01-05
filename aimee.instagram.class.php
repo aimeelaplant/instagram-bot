@@ -6,7 +6,7 @@ class Instagram {
     private $_endpoints = array(
             'tag_search' => 'https://api.instagram.com/v1/tags/%s/media/recent?access_token=%s',
             'media_like' => 'https://api.instagram.com/v1/media/%s/likes',
-            'user_feed'  => 'https://api.instagram.com/v1/users/self/feed?access_token=%s',
+            'user_feed'  => 'https://api.instagram.com/v1/users/self/feed?access_token=%s&count=%s',
             'login' => 'https://api.instagram.com/oauth/authorize/?client_id=%s&redirect_uri=%s&response_type=code&scope=likes',
             'oauth_token' => 'https://api.instagram.com/oauth/access_token',
 
@@ -78,9 +78,9 @@ class Instagram {
         return $data;
     }
 
-    // Gets the feed of the user (your own account)
-    public function getUserFeed() {
-        $url = sprintf($this->_endpoints['user_feed'], $this->getAccessToken());
+    // Gets the feed of the user (your own account) with X number of results
+    public function getUserFeed($num_results) {
+        $url = sprintf($this->_endpoints['user_feed'], $this->getAccessToken(), $num_results);
         return $this->curl($url);
     }
 
