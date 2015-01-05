@@ -1,22 +1,27 @@
-<?
+<?php
 
 /*
-Example for use of aimee.instagram.class.php
+Example use of aimee.instagram.class.php
 */
 
 include 'aimee.instagram.class.php';
 
-$tags = array('englishbulldog', 'bulldog', 'igbulldogs_worldwide');
-
-foreach ($tags as $tag) {
-    // Set the access token
-    $ig = new Instagram('access_token', true);
-    // Get the ID of the media object from a tag.
-    $media_id = $ig->getIDByTag($tag);
-    // Likes media object.
-    $ig->likeMedia($media_id);
-    unset($ig);
+// tags to query
+$tags = array('englishbulldog', 'igbulldogs_worldwide');
+// initiate class
+$ig = new Instagram();
+// set your access token
+$ig->setAccessToken('access_token');
+// loop through tags
+foreach($tags as $tag) {
+    // searches tag
+    $tag = $ig->searchTag($tag);
+    // shuffles json data
+    shuffle($tag['data']);
+    // likes the randomly shuffled tag!
+    $ig->likeMedia($tag['data'][0]['id']);
 }
-
+// free up some memory
+unset($ig);
 
 ?>
