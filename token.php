@@ -8,7 +8,7 @@ if (isset($_GET['code']) {
     // posts the code to Instagram and returns the access token from IG
     $token = $ig->getOAuthToken($code);
 	  // Copy and paste or store this token in a database so you can do setAccessToken() in bot.php
-    echo 'Access token: . ' $token . '(copy and paste or store this in a database).';
+    echo 'Access token: . ' . $token . ' (copy and paste or store this in a database).';
 }
 ?>
 <!DOCTYPE html>
