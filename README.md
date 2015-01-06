@@ -19,6 +19,7 @@ A working example is at `bot.php`. Run a cronjon on `bot.php` and wala! You have
 ## Another example
 Say you want to like a random photo of the last X photos that show up on your feed:
 ```
+<?php
 $ig = new Instagram();
 // sets access token
 $ig->setAccessToken('access_token');
@@ -27,6 +28,7 @@ $results = ig->getUserFeed(5);
 // shuffle results
 shuffle($results['data']);
 // 'POST' a like to the object id.
-$ig->likeMedia($results['data'][0]['id'])
+$ig->likeMedia($results['data'][0]['id']);
+?>
 
 ```
