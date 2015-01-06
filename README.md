@@ -2,7 +2,7 @@ Instagram like bot
 ===============
 This is a simple Instagram class that utilizes the Instagram API (http://instagram.com/developer/). The interface allows us to view our own feed (recent postings from people you're following) or get a random object ID (e.g., a photo or video), given a tag, and like the object.
 
-Run a cronjon on bot.php and wala! You have automated your Instagram life. :)
+A working example is at `bot.php`. Run a cronjon on `bot.php` and wala! You have automated your Instagram life. :)
 
 ## Initial setup
 1. Register your app client at Instagram here: http://instagram.com/developer/clients/register/
@@ -16,7 +16,7 @@ Run a cronjon on bot.php and wala! You have automated your Instagram life. :)
 * `likeMedia($id)` likes the media object.
 * Check out `bot.php` for more info.
 
-## Example
+## Another example
 Say you want to like a random photo of the last X photos that show up on your feed:
 ```
 $ig = new Instagram();
