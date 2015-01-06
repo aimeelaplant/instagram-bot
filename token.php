@@ -3,7 +3,7 @@
 include 'aimee.instagram.class.php'; 
 $url = $ig->getLoginURL();
 
-if (isset($_GET['code']) {
+if (isset($_GET['code'])) {
     $code = $_GET['code'];
     // posts the code to Instagram and returns the access token from IG
     $token = $ig->getOAuthToken($code);
