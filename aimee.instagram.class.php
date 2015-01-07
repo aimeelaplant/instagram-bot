@@ -12,11 +12,10 @@ class Instagram {
 
     );
 
-    public function __construct($client_id=null, $client_secret=null, $redirect_uri=null, $log=false) {
-        $this->client_id = $client_id;
-        $this->client_secret = $client_secret;
-        $this->redirect_uri = $redirect_uri;
-        $this->log = $log;
+    public function __construct($client_id=null, $client_secret=null, $redirect_uri=null) {
+        $this->_client_id = $client_id;
+        $this->_client_secret = $client_secret;
+        $this->_redirect_uri = $redirect_uri;
     }
 
     // login url for user to grant permission to client.
@@ -24,8 +23,8 @@ class Instagram {
         return sprintf($this->_endpoints['login'], $this->client_id, $this->redirect_uri);
     }
 
-    public function setAccessToken($_access_token) {
-        $this->_access_token = $_access_token;
+    public function setAccessToken($access_token) {
+        $this->_access_token = $access_token;
     }
 
     public function getAccessToken() {
@@ -53,10 +52,10 @@ class Instagram {
     
     public function getOAuthToken($code) {
         $params = array(
-            'client_id' => $this->client_id, 
-        'client_secret' => $this->client_secret,
+        'client_id' => $this->_client_id, 
+        'client_secret' => $this->_client_secret,
         'grant_type' => 'authorization_code',
-        'redirect_uri' => $this->redirect_uri,
+        'redirect_uri' => $this->_redirect_uri,
         'code' => $code
         );
         $result = $this->curl($this->_endpoints['oauth_token'], $post_params=$params);
@@ -86,13 +85,13 @@ class Instagram {
     }
 
     // Likes a media object given a media ID (e.g. a photo or video).
-    public function likeMedia($id)  {
+    public function likeMedia($id, $log=false)  {
         $url = sprintf($this->_endpoints['media_like'], $id);
         $params = array('access_token' => $this->getAccessToken());
         $results = $this->curl($url, $post_params=$params);
 
         // log response
-        if ($this->log) {
+        if ($log) {
             if ($results['meta']['code'] == 200)   {
                 $this->log($this->getAccessToken() . 'liked object ID' . $id);
             } else {
