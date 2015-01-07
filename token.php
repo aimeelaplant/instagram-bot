@@ -1,7 +1,7 @@
 <?php
 /* Example to get access token. */
 require_once('aimee.instagram.class.php');
-$ig = new Instagram();
+$ig = new Instagram($client_id="x", $client_secret="y", $redirect_uri="z");
 $url = $ig->getLoginURL();
 
 if (isset($_GET['code'])) {
