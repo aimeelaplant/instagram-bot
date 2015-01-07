@@ -1,6 +1,7 @@
 <?php
-
-include 'aimee.instagram.class.php'; 
+/* Example to get access token. */
+require_once('aimee.instagram.class.php');
+$ig = new Instagram();
 $url = $ig->getLoginURL();
 
 if (isset($_GET['code'])) {
