@@ -2,7 +2,7 @@ Instagram like bot
 ===============
 This is a simple Instagram class that utilizes the Instagram API (http://instagram.com/developer/). The interface allows us to view our own feed (recent postings from people you're following) or get a random object ID (e.g., a photo or video), given a tag, and like the object.
 
-A working example is at `bot.php`. Run a cronjon on `bot.php` and wala! You have automated your Instagram life. :)
+A working example is at `bot.php`. Run a cronjob on `bot.php` and wala! You have automated your Instagram life. :)
 
 ## Initial setup
 1. Register your app client at Instagram here: http://instagram.com/developer/clients/register/
