@@ -48,8 +48,7 @@ class Instagram {
         curl_close($ch);
         return json_decode($results, true);
     }
-    
-    
+
     public function getOAuthToken($code) {
         $params = array(
         'client_id' => $this->_client_id, 
