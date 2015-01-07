@@ -12,7 +12,7 @@ A working example is at `bot.php`. Run a cronjon on `bot.php` and wala! You have
 `new Instagram()` optionally takes up to 4 options. `$client_id`, `$client_secret`, `$redirect_uri` (your client settings given to you by Instagram).
 ## Things the class can do
 * `searchTag('tag')` returns the JSON data for Instagram's search API.
-* `getUserFeed()` returns the JSON data of the user's feed (the user associated with the access token).
+* `getUserFeed($num_results)` returns the JSON data of the user's feed (the user associated with the access token). `$num_results` is optional and how many media objects you want returned. Instagram's default is 30.
 * `likeMedia($id, $log)` likes the media object. Set `$log` to `true` if you want to log liked media in a log.txt file. Default is `false`.
 * Check out `bot.php` for more info.
 
