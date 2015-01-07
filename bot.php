@@ -4,7 +4,7 @@
 Example use of aimee.instagram.class.php
 */
 
-include 'aimee.instagram.class.php';
+require_once('aimee.instagram.class.php');
 
 // tags to query
 $tags = array('englishbulldog', 'igbulldogs_worldwide');
