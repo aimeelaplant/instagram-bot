@@ -9,11 +9,11 @@ A working example is at `bot.php`. Run a cronjon on `bot.php` and wala! You have
 2. Once you have your client ID, client secret, and redirect uri, you need an access token for the account associated with your app. A Google search shows a million ways to get an access token, but I've gotten emails about it, so check out `token.php` as an example.
 
 ## Options
-`new Instagram()` optionally takes up to 4 options. `$client_id`, `$client_secret`, `$redirect_uri` (your client settings given to you by Instagram), and `$log`. Set `$log` to `true` if you want to log liked media in a log.txt file. Default is `false`.
+`new Instagram()` optionally takes up to 4 options. `$client_id`, `$client_secret`, `$redirect_uri` (your client settings given to you by Instagram).
 ## Things the class can do
 * `searchTag('tag')` returns the JSON data for Instagram's search API.
 * `getUserFeed()` returns the JSON data of the user's feed (the user associated with the access token).
-* `likeMedia($id)` likes the media object.
+* `likeMedia($id, $log)` likes the media object. Set `$log` to `true` if you want to log liked media in a log.txt file. Default is `false`.
 * Check out `bot.php` for more info.
 
 ## Another example
