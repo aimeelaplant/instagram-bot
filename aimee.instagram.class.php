@@ -20,7 +20,7 @@ class Instagram {
 
     // login url for user to grant permission to client.
     public function getLoginURL() {
-        return sprintf($this->_endpoints['login'], $this->client_id, $this->redirect_uri);
+        return sprintf($this->_endpoints['login'], $this->_client_id, $this->_redirect_uri);
     }
 
     public function setAccessToken($access_token) {
